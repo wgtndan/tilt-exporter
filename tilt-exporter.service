@@ -1,0 +1,20 @@
+[Unit]
+Description=NodeJS client for Tilt Hydrometer
+Documentation=https://github.com/wgtndan/tilt-exporter
+AssertPathExists=/opt/tilt-exporter
+
+[Service]
+WorkingDirectory=/opt/tilt-exporter
+ExecStart=/usr/bin/node /opt/tilt-exporter/app.js
+Restart=always
+RestartSec=5
+StartLimitBurst=3
+StartLimitInterval=20
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=tilt-nodejs-client
+User=pi
+Group=pi
+
+[Install]
+WantedBy=multi-user.target

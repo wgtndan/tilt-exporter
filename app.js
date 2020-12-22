@@ -13,14 +13,14 @@ const exporter = new PrometheusExporter(
       port: prometheusPort
     },
     () => {
-      console.log("prometheus scrape endpoint: http://localhost:"
+      console.log("prometheus scrape endpoint: http://raspberrypi.local:"
         + prometheusPort 
         + "/metrics");
     }
   );
 const meter = new MeterProvider({
     exporter,
-    interval: 100,
+    interval: 900,
   }).getMeter('tilt-exporter');
 
 const countIBeacon = meter.createCounter("iBeacons", {
