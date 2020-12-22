@@ -7,7 +7,7 @@ const { MeterProvider } = require('@opentelemetry/metrics');
 // const meter = new MeterProvider().getMeter('tilt-exporter');
 
 const prometheusPort = 9876;
-const meter = new MeterRegistry().getMeter('tilt-exporter');
+const meter = new MeterProvider().getMeter('tilt-exporter');
 const exporter = new PrometheusExporter(
   {
     startServer: true,
