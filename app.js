@@ -9,20 +9,21 @@ const { PrometheusExporter } = require('@opentelemetry/exporter-prometheus');
 // const meter = new MeterProvider().getMeter('tilt-exporter');
 
 const prometheusPort = 9876;
-const meter = new MeterProvider().getMeter('tilt-exporter');
 const exporter = new PrometheusExporter(
-  {
-    startServer: true,
-    port: prometheusPort
-  },
-  () => {
-    console.log("prometheus scrape endpoint: http://localhost:"
-      + prometheusPort 
-      + "/metrics");
-  }
-);
-
-meter.addExporter(exporter);
+    {
+      startServer: true,
+      port: prometheusPort
+    },
+    () => {
+      console.log("prometheus scrape endpoint: http://localhost:"
+        + prometheusPort 
+        + "/metrics");
+    }
+  );
+const meter = new MeterProvider({
+    exporter,
+    interval: 1000,
+  }).getMeter('tilt-exporter');
 
 const countIBeacon = meter.createCounter("iBeacons", {
     monotonic: true,
