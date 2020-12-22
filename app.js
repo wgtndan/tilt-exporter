@@ -6,8 +6,6 @@ const dataParser = require('./dataParser');
 const { MeterProvider } = require('@opentelemetry/metrics');
 const { PrometheusExporter } = require('@opentelemetry/exporter-prometheus');
 
-// const meter = new MeterProvider().getMeter('tilt-exporter');
-
 const prometheusPort = 9876;
 const exporter = new PrometheusExporter(
     {
@@ -22,7 +20,7 @@ const exporter = new PrometheusExporter(
   );
 const meter = new MeterProvider({
     exporter,
-    interval: 1000,
+    interval: 100,
   }).getMeter('tilt-exporter');
 
 const countIBeacon = meter.createCounter("iBeacons", {
@@ -42,15 +40,7 @@ const meterSpecificGravity = meter.createValueObserver("specificGravity", {
 });
 
 
-// const iBeaconCount = meter.createCounter("iBeacons", {
-//   description: "Count all iBeacons advertised"
-// });
-
-// const labels = { pid: process.pid };
-
 let countReadings = 0;
-
-let specificGravityAtStart = null;
 
 console.log("App Started");
 console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -77,8 +67,6 @@ scanner.onadvertisement = (advertisement) => {
     console.log("uuid: " + beacon.uuid);
     console.log("rssi: " + beacon.rssi);
     console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-    // console.log(JSON.stringify(beacon, null, "    "))
-    // console.log("--------------------------------------")
 };
 
 scanner.startScan().then(() => {
