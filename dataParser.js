@@ -43,7 +43,7 @@ module.exports.alcoholByMass = (alcoholByVolume) => {
 
 module.exports.getTiltColour = (uuid) => {
     if (uuid) {
-        return Map.get(uuid);
+        return colourMap.get(uuid);
     }
 }
 
