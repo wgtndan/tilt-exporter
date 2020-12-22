@@ -1,6 +1,8 @@
 const Noble = require("noble");
 const BeaconScanner = require("node-beacon-scanner");
 
+console.log("App Started");
+
 var scanner = new BeaconScanner();
 
 scanner.onadvertisement = (advertisement) => {
