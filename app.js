@@ -2,6 +2,8 @@ const Noble = require("noble");
 const BeaconScanner = require("node-beacon-scanner");
 const dataParser = require('./dataParser');
 
+let specificGravityAtStart = null;
+
 console.log("App Started");
 console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
@@ -10,8 +12,8 @@ var scanner = new BeaconScanner();
 scanner.onadvertisement = (advertisement) => {
     var beacon = advertisement["iBeacon"];
     beacon.rssi = advertisement["rssi"];
-    const temperature = dataParser.temperatureCelsius(bleacon);
-    const specificGravity = dataParser.specificGravity(bleacon);
+    const temperature = dataParser.temperatureCelsius(beacon);
+    const specificGravity = dataParser.specificGravity(beacon);
     const alcoholByVolume = dataParser.alcoholByVolume(specificGravityAtStart, specificGravity);
     const alcoholByMass = dataParser.alcoholByMass(alcoholByVolume);
     console.log("temp:" + temperature);
