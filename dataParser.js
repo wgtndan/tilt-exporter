@@ -1,4 +1,13 @@
 "use strict";
+let colourMap = new Map();
+colourMap.set("A495BB10-C5B1-4B44-B512-1370F02D74DE", "Red");
+colourMap.set("A495BB20-C5B1-4B44-B512-1370F02D74DE", "Green");
+colourMap.set("A495BB30-C5B1-4B44-B512-1370F02D74DE", "Black");
+colourMap.set("A495BB40-C5B1-4B44-B512-1370F02D74DE", "Purple");
+colourMap.set("A495BB50-C5B1-4B44-B512-1370F02D74DE", "Orange");
+colourMap.set("A495BB60-C5B1-4B44-B512-1370F02D74DE", "Blue");
+colourMap.set("A495BB70-C5B1-4B44-B512-1370F02D74DE", "Yellow");
+colourMap.set("A495BB80-C5B1-4B44-B512-1370F02D74DE", "Pink");
 
 module.exports.temperatureCelsius = (bleacon) => {
   return (bleacon.major - 32) / 1.8;
@@ -30,3 +39,11 @@ module.exports.alcoholByMass = (alcoholByVolume) => {
     return null
   }
 }
+
+
+module.exports.getTiltColour = (uuid) => {
+    if (uuid) {
+        return Map.get(uuid);
+    }
+}
+

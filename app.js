@@ -16,9 +16,11 @@ scanner.onadvertisement = (advertisement) => {
     const specificGravity = dataParser.specificGravity(beacon);
     const alcoholByVolume = dataParser.alcoholByVolume(specificGravityAtStart, specificGravity);
     const alcoholByMass = dataParser.alcoholByMass(alcoholByVolume);
+    const colour = dataParser.getTiltColour(beacon.uuid);
     console.log("temp:" + temperature);
     console.log("SG: " + specificGravity);
     console.log("abv: " + alcoholByVolume);
+    console.log("colour: " + colour); 
     console.log("uuid: " + beacon.uuid);
     console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     console.log(JSON.stringify(beacon, null, "    "))
