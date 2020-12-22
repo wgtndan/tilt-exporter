@@ -68,7 +68,7 @@ scanner.onadvertisement = (advertisement) => {
 
     countIBeacon.add(1, {tiltColour: colour});
     meterTemperature.bind({tiltColour: colour}).update(temperature);
-    // meterSpecificGravity.observe(specificGravity, {tiltColour: colour});
+    meterSpecificGravity.bind({tiltColour: colour}).update(specificGravity);
 
     console.log("count: " + countReadings);
     console.log("temp:" + temperature);
