@@ -67,8 +67,8 @@ scanner.onadvertisement = (advertisement) => {
     const colour = dataParser.getTiltColour(beacon.uuid);
 
     countIBeacon.add(1, {tiltColour: colour});
-    meterTemperature.observe(temperature, {tiltColour: colour});
-    meterSpecificGravity.observe(specificGravity, {tiltColour: colour});
+    // meterTemperature.observe(temperature, {tiltColour: colour});
+    // meterSpecificGravity.observe(specificGravity, {tiltColour: colour});
 
     console.log("count: " + countReadings);
     console.log("temp:" + temperature);
