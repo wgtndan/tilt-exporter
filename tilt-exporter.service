@@ -2,6 +2,7 @@
 Description=NodeJS client for Tilt Hydrometer
 Documentation=https://github.com/wgtndan/tilt-exporter
 AssertPathExists=/opt/tilt-exporter
+After=bluetooth.target
 
 [Service]
 WorkingDirectory=/opt/tilt-exporter
