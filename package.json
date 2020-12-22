@@ -1,0 +1,23 @@
+{
+  "name": "tilt-exporter",
+  "version": "1.0.0",
+  "description": "A Prometheus style exporter for monitoring Tilt Hydrometers from Raspberry Pi",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "tbc"
+  },
+  "keywords": [
+    "Tilt",
+    "Hydrometer"
+  ],
+  "author": "Dan Aherne-McInteer",
+  "license": "MIT",
+  "dependencies": {
+    "noble": "^1.9.1",
+    "node-beacon-scanner": "^0.2.2"
+  }
+}
