@@ -4,6 +4,8 @@ const dataParser = require('./dataParser');
 
 // MONITORING 
 const { MeterProvider } = require('@opentelemetry/metrics');
+const { PrometheusExporter } = require('@opentelemetry/exporter-prometheus');
+
 // const meter = new MeterProvider().getMeter('tilt-exporter');
 
 const prometheusPort = 9876;
