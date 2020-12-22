@@ -30,12 +30,12 @@ const countIBeacon = meter.createCounter("iBeacons", {
     labelKeys: ["tiltColour"],
     description: "Counts total number of iBeacons"
   });
-const meterTemperature = meter.createGauge("temperature", {
+const meterTemperature = meter.createValueObserver("temperature", {
     monotonic: false,
     labelKeys: ["tiltColour"],
     description: "Records temperature of Tilt"
 });
-const meterSpecificGravity = meter.createGauge("specificGravity", {
+const meterSpecificGravity = meter.createValueObserver("specificGravity", {
     monotonic: false,
     labelKeys: ["tiltColour"],
     description: "Records specificGravity of Tilt"
@@ -49,7 +49,6 @@ const meterSpecificGravity = meter.createGauge("specificGravity", {
 // const labels = { pid: process.pid };
 
 let countReadings = 0;
-const boundCounter = counter.bind(labels);
 
 let specificGravityAtStart = null;
 
@@ -60,17 +59,16 @@ var scanner = new BeaconScanner();
 
 scanner.onadvertisement = (advertisement) => {
     countReadings++;
-    boundCounter.add(1);
     var beacon = advertisement["iBeacon"];
     beacon.rssi = advertisement["rssi"];
+    
     const temperature = dataParser.temperatureCelsius(beacon);
     const specificGravity = dataParser.specificGravity(beacon);
     const colour = dataParser.getTiltColour(beacon.uuid);
-    let labels = meter.labels({ tiltColour: colour});
 
-    countIBeacon.bind(labels).add(1);
-    meterTemperature.bind(labels).set(temperature);
-    meterSpecificGravity.bind(labels).set(specificGravity);
+    countIBeacon.add(1, {tiltColour: colour});
+    meterTemperature.observe(temperature, {tiltColour: colour});
+    meterSpecificGravity.observe(specificGravity, {tiltColour: colour});
 
     console.log("count: " + countReadings);
     console.log("temp:" + temperature);
