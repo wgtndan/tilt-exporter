@@ -17,6 +17,10 @@
   "author": "Dan Aherne-McInteer",
   "license": "MIT",
   "dependencies": {
+    "@opentelemetry/core": "^0.14.0",
+    "@opentelemetry/exporter-prometheus": "^0.14.0",
+    "@opentelemetry/metrics": "^0.14.0",
+    "@opentelemetry/node": "^0.14.0",
     "noble": "^1.9.1",
     "node-beacon-scanner": "^0.2.2"
   }
