@@ -1,5 +1,6 @@
 const Noble = require("noble");
 const BeaconScanner = require("node-beacon-scanner");
+const dataParser = require('./dataParser');
 
 console.log("App Started");
 console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
