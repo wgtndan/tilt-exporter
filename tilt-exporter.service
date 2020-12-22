@@ -5,7 +5,7 @@ AssertPathExists=/opt/tilt-exporter
 
 [Service]
 WorkingDirectory=/opt/tilt-exporter
-ExecStart=/usr/bin/node /opt/tilt-exporter/app.js
+ExecStart=/opt/tilt-exporter/start.sh
 Restart=always
 RestartSec=5
 StartLimitBurst=3
@@ -13,6 +13,9 @@ StartLimitInterval=20
 StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier=tilt-nodejs-client
+LimitNOFILE=4096
+IgnoreSIGPIPE=false
+KillMode=process
 User=pi
 Group=pi
 

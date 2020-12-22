@@ -38,7 +38,7 @@ In order to execute [`app.js`](app.js) automatically after the system is booted,
 
 1. Copy the `.service` file to the appropriate location:
 
-        sudo cp /opt/tilt-exporter.service /etc/systemd/system
+        sudo cp /opt/tilt-exporter/tilt-exporter.service /etc/systemd/system
 
 1. Enable the service to systemd:
 
