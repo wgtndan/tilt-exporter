@@ -15,4 +15,5 @@ scanner.startScan().then(() => {
     console.log("Scanning for BLE devices...")  ;
 }).catch((error) => {
     console.error(error);
+    console.log(error);
 });
