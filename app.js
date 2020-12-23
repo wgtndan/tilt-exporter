@@ -62,15 +62,15 @@ scanner.onadvertisement = (advertisement) => {
     var beacon = advertisement["iBeacon"];
     beacon.rssi = advertisement["rssi"];
     
-    const temperature = dataParser.temperatureCelsius(beacon);
-    const specificGravity = dataParser.specificGravity(beacon);
+    const temperature = Number(dataParser.temperatureCelsius(beacon));
+    const specificGravity = Number(dataParser.specificGravity(beacon));
     const uncalTemperature = dataParser.uncalTemperatureCelsius(beacon);
     const uncalSpecificGravity = dataParser.uncalSpecificGravity(beacon);
     const colour = dataParser.getTiltColour(beacon.uuid);
 
     countIBeacon.add(1, {tiltColour: colour});
-    // meterTemperature.bind({tiltColour: colour}).update(temperature);
-    // meterSpecificGravity.bind({tiltColour: colour}).update(specificGravity);
+    meterTemperature.bind({tiltColour: colour}).update(temperature);
+    meterSpecificGravity.bind({tiltColour: colour}).update(specificGravity);
     meterUncalTemperature.bind({tiltColour: colour}).update(uncalTemperature);
     meterUncalSpecificGravity.bind({tiltColour: colour}).update(uncalSpecificGravity);
 
