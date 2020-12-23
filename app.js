@@ -69,8 +69,8 @@ scanner.onadvertisement = (advertisement) => {
     const colour = dataParser.getTiltColour(beacon.uuid);
 
     countIBeacon.add(1, {tiltColour: colour});
-    meterTemperature.bind({tiltColour: colour}).update(temperature);
-    meterSpecificGravity.bind({tiltColour: colour}).update(specificGravity);
+    // meterTemperature.bind({tiltColour: colour}).update(temperature);
+    // meterSpecificGravity.bind({tiltColour: colour}).update(specificGravity);
     meterUncalTemperature.bind({tiltColour: colour}).update(uncalTemperature);
     meterUncalSpecificGravity.bind({tiltColour: colour}).update(uncalSpecificGravity);
 
