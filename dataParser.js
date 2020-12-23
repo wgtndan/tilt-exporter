@@ -20,7 +20,7 @@ module.exports.uncalTemperatureCelsius = (bleacon) => {
 }
 
 module.exports.specificGravity = (bleacon) => {
-  return getCalibratedGravity(bleacon.minor / 1000);
+  return Number(getCalibratedGravity(bleacon.minor / 1000)).toFixed(4);
 }
 module.exports.uncalSpecificGravity = (bleacon) => {
   return bleacon.minor / 1000;
