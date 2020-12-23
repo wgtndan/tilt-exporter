@@ -22,6 +22,7 @@
     "@opentelemetry/exporter-prometheus": "^0.14.0",
     "@opentelemetry/metrics": "^0.14.0",
     "@opentelemetry/node": "^0.14.0",
+    "fs": "0.0.1-security",
     "noble": "^1.9.1",
     "node-beacon-scanner": "^0.2.2"
   }
