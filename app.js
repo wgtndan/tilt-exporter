@@ -77,7 +77,7 @@ scanner.onadvertisement = (advertisement) => {
     console.log("count: " + countReadings,
                 ", temp:" + temperature,
                 ", SG: " + specificGravity,
-                ", uncalTemp:" + uncalTemperature,
+                ", uncalTemp: " + uncalTemperature,
                 ", uncalSG: " + uncalSpecificGravity,
                 ", colour: " + colour,
                 ", uuid: " + beacon.uuid,

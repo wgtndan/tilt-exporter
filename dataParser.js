@@ -70,7 +70,7 @@ function getCalibratedGravity (SG){
   // console.log(unCalSGPointsTempArray);
   var indexSG = unCalSGPointsTempArray.indexOf(SG);
   var calSG = linearInterpolation (Number(SG), Number(unCalSGPointsArray[indexSG-1]), Number(actualSGPointsArray[indexSG-1]), Number(unCalSGPointsArray[indexSG]), Number(actualSGPointsArray[indexSG]));
-  return String(Number(calSG).toFixed(4));
+  return Number(calSG).toFixed(4);
 }
 function getCalibratedTemperature (temp){
 
@@ -88,7 +88,7 @@ function getCalibratedTemperature (temp){
   var indextemp = unCalTempPointsTempArray.indexOf(temp)-1;
   // console.log(unCalTempPointsArray);
   var caltemp = linearInterpolation(Number(temp), Number(unCalTempPointsArray[indextemp-1]), Number(actualTempPointsArray[indextemp-1]), Number(unCalTempPointsArray[indextemp]), Number(actualTempPointsArray[indextemp]));
-  return String(Number(caltemp).toFixed(2));
+  return Number(caltemp).toFixed(2);
 }
 
 
