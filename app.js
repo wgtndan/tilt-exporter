@@ -63,7 +63,7 @@ scanner.onadvertisement = (advertisement) => {
     var beacon = advertisement["iBeacon"];
     beacon.rssi = advertisement["rssi"];
 
-    var tiltbeacon;
+    var tiltbeacon = {};
     tiltbeacon.uuid = beacon.uuid;
     tiltbeacon.rssi = beacon.rssi;    
     tiltbeacon.colour = dataParser.getTiltColour(beacon.uuid);
