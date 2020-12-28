@@ -62,7 +62,7 @@ scanner.onadvertisement = (advertisement) => {
     countReadings++;
     var beacon = advertisement["iBeacon"];
 
-    logger.info({message: "New Beacon Received", labels: {'service_name': 'tilt-exporter','tilt_exporter_uuid': beacon.uuid}});
+    logger.info({message: "New Beacon Received", labels: {'tilt_exporter_uuid': beacon.uuid}, beacon});
     beacon.rssi = advertisement["rssi"];
 
     var tiltbeacon = {};
@@ -71,7 +71,7 @@ scanner.onadvertisement = (advertisement) => {
     tiltbeacon.colour = dataParser.getTiltColour(beacon.uuid);
     if (typeof tiltbeacon.colour === 'undefined') {
       // Not a Tilt Beacon
-      logger.warn({message: "Detected Non-Tilt Beacon", labels: {'service_name': 'tilt-exporter','tilt_exporter_uuid': beacon.uuid}});
+      logger.warn({message: "Detected Non-Tilt Beacon", labels: {'tilt_exporter_uuid': beacon.uuid}});
       return;
     } 
 
@@ -89,7 +89,7 @@ scanner.onadvertisement = (advertisement) => {
   
     meterUncalSpecificGravity.bind({tiltColour: tiltbeacon.colour}).update(tiltbeacon.uncalSpecificGravity);
 
-    logger.info({message: "Valid Beacon Processed", labels:{'service_name': 'tilt-exporter','tilt_exporter_colour': tiltbeacon.colour, 'tilt_exporter_uuid':tiltbeacon.uuid}});
+    logger.info({message: "Valid Beacon Processed", labels:{'tilt_exporter_colour': tiltbeacon.colour, 'tilt_exporter_uuid':tiltbeacon.uuid},  tiltbeacon});
     
 };
 
