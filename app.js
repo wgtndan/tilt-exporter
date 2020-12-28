@@ -1,6 +1,7 @@
 const Noble = require("noble");
 const BeaconScanner = require("node-beacon-scanner");
 const dataParser = require('./dataParser');
+const logger = require('./logger');
 
 // MONITORING 
 const { MeterProvider } = require('@opentelemetry/metrics');
@@ -13,7 +14,7 @@ const exporter = new PrometheusExporter(
       port: prometheusPort
     },
     () => {
-      console.log("prometheus scrape endpoint: http://raspberrypi.local:"
+      logger.info("prometheus scrape endpoint: http://raspberrypi.local:"
         + prometheusPort 
         + "/metrics");
     }
@@ -52,8 +53,8 @@ const meterUncalSpecificGravity = meter.createValueObserver("uncalSpecificGravit
 
 let countReadings = 0;
 
-console.log("App Started");
-console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+logger.info("tilt-exporter Started");
+//console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
 var scanner = new BeaconScanner();
 
@@ -69,7 +70,7 @@ scanner.onadvertisement = (advertisement) => {
     const colour = dataParser.getTiltColour(beacon.uuid);
     if (typeof colour === 'undefined') {
       // Not a Tilt Beacon
-      console.log("Detected Non-Tilt Beacon: " + JSON.stringify(beacon));
+      logger.warn("Detected Non-Tilt Beacon: " + JSON.stringify(beacon));
       return;
     }
 
@@ -79,7 +80,7 @@ scanner.onadvertisement = (advertisement) => {
     meterUncalTemperature.bind({tiltColour: colour}).update(uncalTemperature);
     meterUncalSpecificGravity.bind({tiltColour: colour}).update(uncalSpecificGravity);
 
-    console.log("count: " + countReadings,
+    logger.info("Valid Beacon, count: " + countReadings,
                 ", temp: " + temperature,
                 ", SG: " + specificGravity,
                 ", uncalTemp: " + uncalTemperature,
@@ -91,8 +92,8 @@ scanner.onadvertisement = (advertisement) => {
 };
 
 scanner.startScan().then(() => {
-    console.log("Scanning for BLE devices...")  ;
+    logger.info("Scanning for BLE devices...")  ;
 }).catch((error) => {
-    console.error(error);
+    logger.error(error);
     // console.log(error);
 });

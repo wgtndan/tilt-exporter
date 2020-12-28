@@ -24,6 +24,7 @@
     "@opentelemetry/node": "^0.14.0",
     "fs": "0.0.1-security",
     "noble": "^1.9.1",
-    "node-beacon-scanner": "^0.2.2"
+    "node-beacon-scanner": "^0.2.2",
+    "winston": "^3.3.3"
   }
 }
