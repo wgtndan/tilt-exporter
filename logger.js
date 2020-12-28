@@ -6,7 +6,7 @@ const logger = createLogger({
     transports: [
         new transports.Console(),
         new transports.File({ filename: 'combined.log' }),
-        new transports.LokiTransport({
+        new LokiTransport({
             host: "http://rpi2.local:3100",
             json: true,
             labels: {testing: 'true'}
