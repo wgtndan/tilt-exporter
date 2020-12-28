@@ -62,32 +62,31 @@ scanner.onadvertisement = (advertisement) => {
     countReadings++;
     var beacon = advertisement["iBeacon"];
     beacon.rssi = advertisement["rssi"];
-    
-    const temperature = Number(dataParser.temperatureCelsius(beacon));
-    const specificGravity = Number(dataParser.specificGravity(beacon));
-    const uncalTemperature = dataParser.uncalTemperatureCelsius(beacon);
-    const uncalSpecificGravity = dataParser.uncalSpecificGravity(beacon);
-    const colour = dataParser.getTiltColour(beacon.uuid);
-    if (typeof colour === 'undefined') {
+
+    var tiltbeacon;
+    tiltbeacon.uuid = beacon.uuid;
+    tiltbeacon.rssi = beacon.rssi;    
+    tiltbeacon.colour = dataParser.getTiltColour(beacon.uuid);
+    if (typeof tiltbeacon.colour === 'undefined') {
       // Not a Tilt Beacon
-      logger.warn("Detected Non-Tilt Beacon: " + JSON.stringify(beacon));
+      logger.warn("Detected Non-Tilt Beacon", beacon);
       return;
-    }
+    } 
+
+    //Custom Tilt Beacon Values
+    tiltbeacon.temperature = Number(dataParser.temperatureCelsius(beacon));
+    tiltbeacon.pecificGravity = Number(dataParser.specificGravity(beacon));
+    tiltbeacon.uncalTemperature = dataParser.uncalTemperatureCelsius(beacon);
+    tiltbeacon.uncalSpecificGravity = dataParser.uncalSpecificGravity(beacon);
+
 
     countIBeacon.add(1, {tiltColour: colour});
-    meterTemperature.bind({tiltColour: colour}).update(temperature);
-    meterSpecificGravity.bind({tiltColour: colour}).update(specificGravity);
-    meterUncalTemperature.bind({tiltColour: colour}).update(uncalTemperature);
-    meterUncalSpecificGravity.bind({tiltColour: colour}).update(uncalSpecificGravity);
+    meterTemperature.bind({tiltColour: colour}).update(tiltbeacon.temperature);
+    meterSpecificGravity.bind({tiltColour: colour}).update(tiltbeacon.specificGravity);
+    meterUncalTemperature.bind({tiltColour: colour}).update(tiltbeacon.uncalTemperature);
+    meterUncalSpecificGravity.bind({tiltColour: colour}).update(tiltbeacon.uncalSpecificGravity);
 
-    logger.info("Valid Beacon, count: " + countReadings
-                + ", temp: " + temperature
-                + ", SG: " + specificGravity
-                + ", uncalTemp: " + uncalTemperature
-                + ", uncalSG: " + uncalSpecificGravity
-                + ", colour: " + colour
-                + ", uuid: " + beacon.uuid
-                + ", rssi: " + beacon.rssi);
+    logger.info("Valid Beacon Received!", tiltbeacon);
     
 };
 
@@ -95,5 +94,4 @@ scanner.startScan().then(() => {
     logger.info("Scanning for BLE devices...")  ;
 }).catch((error) => {
     logger.error(error);
-    // console.log(error);
 });
