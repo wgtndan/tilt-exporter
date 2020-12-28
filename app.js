@@ -82,10 +82,15 @@ scanner.onadvertisement = (advertisement) => {
     tiltbeacon.uncalSpecificGravity = Number(dataParser.uncalSpecificGravity(beacon));
 
 
+    console.log("Count");
     countIBeacon.add(1, {tiltColour: tiltbeacon.colour});
+    console.log("Temp");
     meterTemperature.bind({tiltColour: tiltbeacon.colour}).update(tiltbeacon.temperature);
+    console.log("SG");
     meterSpecificGravity.bind({tiltColour: tiltbeacon.colour}).update(tiltbeacon.specificGravity);
+    console.log("UCTemp");
     meterUncalTemperature.bind({tiltColour: tiltbeacon.colour}).update(tiltbeacon.uncalTemperature);
+    console.log("UCSG");
     meterUncalSpecificGravity.bind({tiltColour: tiltbeacon.colour}).update(tiltbeacon.uncalSpecificGravity);
 
     logger.info("Valid Beacon Processed", tiltbeacon);
