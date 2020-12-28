@@ -80,14 +80,14 @@ scanner.onadvertisement = (advertisement) => {
     meterUncalTemperature.bind({tiltColour: colour}).update(uncalTemperature);
     meterUncalSpecificGravity.bind({tiltColour: colour}).update(uncalSpecificGravity);
 
-    logger.info("Valid Beacon, count: " + countReadings,
-                ", temp: " + temperature,
-                ", SG: " + specificGravity,
-                ", uncalTemp: " + uncalTemperature,
-                ", uncalSG: " + uncalSpecificGravity,
-                ", colour: " + colour,
-                ", uuid: " + beacon.uuid,
-                ", rssi: " + beacon.rssi);
+    logger.info("Valid Beacon, count: " + countReadings
+                + ", temp: " + temperature
+                + ", SG: " + specificGravity
+                + ", uncalTemp: " + uncalTemperature
+                + ", uncalSG: " + uncalSpecificGravity
+                + ", colour: " + colour
+                + ", uuid: " + beacon.uuid
+                + ", rssi: " + beacon.rssi);
     
 };
 
