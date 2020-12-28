@@ -10,7 +10,7 @@ const logger = createLogger({
             host: "http://rpi2.local:3100",
             json: true,
             labels: {testing: 'true'},
-            level: info
+            level: this.info
         })
     ]
  });
