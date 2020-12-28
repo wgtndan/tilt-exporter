@@ -67,6 +67,11 @@ scanner.onadvertisement = (advertisement) => {
     const uncalTemperature = dataParser.uncalTemperatureCelsius(beacon);
     const uncalSpecificGravity = dataParser.uncalSpecificGravity(beacon);
     const colour = dataParser.getTiltColour(beacon.uuid);
+    if (typeof colour === 'undefined') {
+      // Not a Tilt Beacon
+      console.log("Detected Non-Tilt Beacon: " + JSON.stringify(beacon));
+      return;
+    }
 
     countIBeacon.add(1, {tiltColour: colour});
     meterTemperature.bind({tiltColour: colour}).update(temperature);
@@ -75,7 +80,7 @@ scanner.onadvertisement = (advertisement) => {
     meterUncalSpecificGravity.bind({tiltColour: colour}).update(uncalSpecificGravity);
 
     console.log("count: " + countReadings,
-                ", temp:" + temperature,
+                ", temp: " + temperature,
                 ", SG: " + specificGravity,
                 ", uncalTemp: " + uncalTemperature,
                 ", uncalSG: " + uncalSpecificGravity,
@@ -89,5 +94,5 @@ scanner.startScan().then(() => {
     console.log("Scanning for BLE devices...")  ;
 }).catch((error) => {
     console.error(error);
-    console.log(error);
+    // console.log(error);
 });
