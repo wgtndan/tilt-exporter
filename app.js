@@ -62,7 +62,7 @@ scanner.onadvertisement = (advertisement) => {
     countReadings++;
     var beacon = advertisement["iBeacon"];
 
-    logger.info("New Beacon Received", tiltbeacon);
+    logger.info({message: "New Beacon Received", labels:{'uuid': beacon.uuid}}, beacon);
     beacon.rssi = advertisement["rssi"];
 
     var tiltbeacon = {};
@@ -71,7 +71,7 @@ scanner.onadvertisement = (advertisement) => {
     tiltbeacon.colour = dataParser.getTiltColour(beacon.uuid);
     if (typeof tiltbeacon.colour === 'undefined') {
       // Not a Tilt Beacon
-      logger.warn("Detected Non-Tilt Beacon", beacon.uuid);
+      logger.warn({message: "Detected Non-Tilt Beacon", labels:{'uuid': beacon.uuid}});
       return;
     } 
 
@@ -89,7 +89,7 @@ scanner.onadvertisement = (advertisement) => {
   
     meterUncalSpecificGravity.bind({tiltColour: tiltbeacon.colour}).update(tiltbeacon.uncalSpecificGravity);
 
-    logger.info("Valid Beacon Processed", tiltbeacon);
+    logger.info({message: "Valid Beacon Processed", labels:{'colour': tiltbeacon.colour, 'uuid':tiltbeacon.uuid},  tiltbeacon});
     
 };
 
