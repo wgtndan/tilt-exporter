@@ -69,8 +69,10 @@ scanner.onadvertisement = (advertisement) => {
     tiltbeacon.uuid = beacon.uuid;
     tiltbeacon.rssi = beacon.rssi;    
     tiltbeacon.colour = dataParser.getTiltColour(beacon.uuid);
+    
     if (typeof tiltbeacon.colour === 'undefined') {
       // Not a Tilt Beacon
+      console.log("Random Detected Non-Tilt Beacon", beacon);
       logger.warn({message: "Detected Non-Tilt Beacon", labels: {'tilt_exporter_uuid': beacon.uuid}});
       return;
     } 
