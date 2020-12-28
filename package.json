@@ -25,6 +25,7 @@
     "fs": "0.0.1-security",
     "noble": "^1.9.1",
     "node-beacon-scanner": "^0.2.2",
-    "winston": "^3.3.3"
+    "winston": "^3.3.3",
+    "winston-loki": "^6.0.0-rc.9"
   }
 }
