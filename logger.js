@@ -9,7 +9,7 @@ const logger = createLogger({
         new LokiTransport({
             host: "http://rpi2.local:3100",
             json: true,
-            labels: {ServiceName: 'tilt-exporter'}
+            labels: {service_name: 'tilt-exporter'}
         })
     ]
  });
