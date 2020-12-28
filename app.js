@@ -62,7 +62,7 @@ scanner.onadvertisement = (advertisement) => {
     countReadings++;
     var beacon = advertisement["iBeacon"];
 
-    logger.info({message: "New Beacon Received", labels:{'uuid': beacon.uuid}}, beacon);
+    logger.info({message: "New Beacon Received", labels:{'uuid': beacon.uuid}, beacon});
     beacon.rssi = advertisement["rssi"];
 
     var tiltbeacon = {};
