@@ -80,13 +80,13 @@ scanner.onadvertisement = (advertisement) => {
     tiltbeacon.uncalSpecificGravity = dataParser.uncalSpecificGravity(beacon);
 
 
-    countIBeacon.add(1, {tiltColour: colour});
-    meterTemperature.bind({tiltColour: colour}).update(tiltbeacon.temperature);
-    meterSpecificGravity.bind({tiltColour: colour}).update(tiltbeacon.specificGravity);
-    meterUncalTemperature.bind({tiltColour: colour}).update(tiltbeacon.uncalTemperature);
-    meterUncalSpecificGravity.bind({tiltColour: colour}).update(tiltbeacon.uncalSpecificGravity);
+    countIBeacon.add(1, {tiltColour: tiltbeacon.colour});
+    meterTemperature.bind({tiltColour: tiltbeacon.colour}).update(tiltbeacon.temperature);
+    meterSpecificGravity.bind({tiltColour: tiltbeacon.colour}).update(tiltbeacon.specificGravity);
+    meterUncalTemperature.bind({tiltColour: tiltbeacon.colour}).update(tiltbeacon.uncalTemperature);
+    meterUncalSpecificGravity.bind({tiltColour: tiltbeacon.colour}).update(tiltbeacon.uncalSpecificGravity);
 
-    logger.info("Valid Beacon Received!", tiltbeacon);
+    logger.info("Valid Beacon Processed", tiltbeacon);
     
 };
 
