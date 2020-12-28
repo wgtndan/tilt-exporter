@@ -14,7 +14,7 @@ const exporter = new PrometheusExporter(
       port: prometheusPort
     },
     () => {
-      logger.info("prometheus scrape endpoint: http://raspberrypi.local:"
+      logger.info("prometheus scrape endpoint: http://rpi1.local:"
         + prometheusPort 
         + "/metrics");
     }
