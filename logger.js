@@ -8,7 +8,8 @@ const logger = createLogger({
         // new transports.File({ filename: 'combined.log' }),
         new LokiTransport({
             host: "http://rpi2.local:3100",
-            json: true
+            json: true,
+            labels: {ServiceName: 'tilt-exporter'}
         })
     ]
  });
