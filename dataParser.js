@@ -48,6 +48,9 @@ module.exports.alcoholByMass = (alcoholByVolume) => {
   }
 }
 
+module.exports.getBatchLabel = () => {
+  return calibrationPoints.batchLabel;
+}
 
 module.exports.getTiltColour = (uuid) => {
     if (uuid) {

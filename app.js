@@ -26,27 +26,27 @@ const meter = new MeterProvider({
 
 const countIBeacon = meter.createCounter("iBeacons", {
     monotonic: true,
-    labelKeys: ["tiltColour"],
+    labelKeys: ["tiltColour","batchLabel"],
     description: "Counts total number of iBeacons"
   });
 const meterTemperature = meter.createValueObserver("temperature", {
     monotonic: false,
-    labelKeys: ["tiltColour"],
+    labelKeys: ["tiltColour","batchLabel"],
     description: "Records temperature of Tilt"
 });
 const meterSpecificGravity = meter.createValueObserver("specificGravity", {
     monotonic: false,
-    labelKeys: ["tiltColour"],
+    labelKeys: ["tiltColour","batchLabel"],
     description: "Records specificGravity of Tilt"
 });
 const meterUncalTemperature = meter.createValueObserver("uncalTemperature", {
   monotonic: false,
-  labelKeys: ["tiltColour"],
+  labelKeys: ["tiltColour","batchLabel"],
   description: "Records Uncalibrated temperature of Tilt"
 });
 const meterUncalSpecificGravity = meter.createValueObserver("uncalSpecificGravity", {
   monotonic: false,
-  labelKeys: ["tiltColour"],
+  labelKeys: ["tiltColour","batchLabel"],
   description: "Records Uncalibrated specificGravity of Tilt"
 });
 
@@ -69,6 +69,7 @@ scanner.onadvertisement = (advertisement) => {
     tiltbeacon.uuid = beacon.uuid;
     tiltbeacon.rssi = beacon.rssi;    
     tiltbeacon.colour = dataParser.getTiltColour(beacon.uuid);
+    tiltbeacon.batchLabel = dataParser.getBatchLabel();
     
     if (typeof tiltbeacon.colour === 'undefined') {
       // Not a Tilt Beacon
@@ -83,16 +84,13 @@ scanner.onadvertisement = (advertisement) => {
     tiltbeacon.uncalTemperature = Number(dataParser.uncalTemperatureCelsius(beacon));
     tiltbeacon.uncalSpecificGravity = Number(dataParser.uncalSpecificGravity(beacon));
 
+    countIBeacon.add(1, {tiltColour: tiltbeacon.colour, batchLabel: tiltbeacon.batchLabel});
+    meterTemperature.bind({tiltColour: tiltbeacon.colour, batchLabel: tiltbeacon.batchLabel}).update(tiltbeacon.temperature);
+    meterSpecificGravity.bind({tiltColour: tiltbeacon.colour, batchLabel: tiltbeacon.batchLabel}).update(tiltbeacon.specificGravity);
+    meterUncalTemperature.bind({tiltColour: tiltbeacon.colour, batchLabel: tiltbeacon.batchLabel}).update(tiltbeacon.uncalTemperature);
+    meterUncalSpecificGravity.bind({tiltColour: tiltbeacon.colour, batchLabel: tiltbeacon.batchLabel}).update(tiltbeacon.uncalSpecificGravity);
 
-    countIBeacon.add(1, {tiltColour: tiltbeacon.colour});
-    meterTemperature.bind({tiltColour: tiltbeacon.colour}).update(tiltbeacon.temperature);
-    meterSpecificGravity.bind({tiltColour: tiltbeacon.colour}).update(tiltbeacon.specificGravity);
-    meterUncalTemperature.bind({tiltColour: tiltbeacon.colour}).update(tiltbeacon.uncalTemperature);
-  
-    meterUncalSpecificGravity.bind({tiltColour: tiltbeacon.colour}).update(tiltbeacon.uncalSpecificGravity);
-
-    logger.info({message: "Valid Beacon Processed", labels:{'tilt_exporter_colour': tiltbeacon.colour, 'tilt_exporter_uuid':tiltbeacon.uuid},  tiltbeacon});
-    
+    logger.info({message: "Valid Beacon Processed", labels:{'tilt_exporter_colour': tiltbeacon.colour, 'tilt_exporter_batchLanel': tiltbeacon.batchLabel, 'tilt_exporter_uuid':tiltbeacon.uuid},  tiltbeacon});
 };
 
 scanner.startScan().then(() => {
