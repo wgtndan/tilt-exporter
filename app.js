@@ -90,7 +90,8 @@ scanner.onadvertisement = (advertisement) => {
     meterUncalTemperature.bind({tiltColour: tiltbeacon.colour, batchLabel: tiltbeacon.batchLabel}).update(tiltbeacon.uncalTemperature);
     meterUncalSpecificGravity.bind({tiltColour: tiltbeacon.colour, batchLabel: tiltbeacon.batchLabel}).update(tiltbeacon.uncalSpecificGravity);
 
-    logger.info({message: "Valid Beacon Processed", labels:{'tilt_exporter_colour': tiltbeacon.colour, 'tilt_exporter_batchLanel': tiltbeacon.batchLabel, 'tilt_exporter_uuid':tiltbeacon.uuid},  tiltbeacon});
+    // logger.info({message: "Valid Beacon Processed", labels:{'tilt_exporter_colour': tiltbeacon.colour, 'tilt_exporter_batchLanel': tiltbeacon.batchLabel, 'tilt_exporter_uuid':tiltbeacon.uuid},  tiltbeacon});
+    logger.info("Valid Beacon Processed",  tiltbeacon);
 };
 
 scanner.startScan().then(() => {
