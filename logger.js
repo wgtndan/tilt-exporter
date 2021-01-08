@@ -5,7 +5,7 @@ const logger = createLogger({
     levels: config.syslog.levels,
     transports: [
         new transports.Console({
-            format: winston.format.json()
+            format: format.json()
         }),
         // new transports.File({ filename: 'combined.log' }),
         new LokiTransport({
