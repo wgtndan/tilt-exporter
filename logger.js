@@ -13,4 +13,4 @@ const logger = createLogger({
         })
     ]
  });
- module.exports = logger;e
+ module.exports = logger;
