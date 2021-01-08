@@ -4,11 +4,13 @@ const LokiTransport = require("winston-loki");
 const logger = createLogger({
     levels: config.syslog.levels,
     transports: [
-        // new transports.Console(),
+        new transports.Console({
+            format: winston.format.json()
+        }),
         // new transports.File({ filename: 'combined.log' }),
         new LokiTransport({
             host: "http://rpi2.local:3100",
-            json: false,
+            json: true,
             labels: {service_name: 'tilt-exporter'}
         })
     ]
